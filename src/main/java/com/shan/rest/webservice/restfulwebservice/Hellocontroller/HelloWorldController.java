@@ -1,4 +1,4 @@
-package com.shan.rest.webservice.restfulwebservice.controller;
+package com.shan.rest.webservice.restfulwebservice.Hellocontroller;
 
 import org.springframework.web.bind.annotation.*;
 
