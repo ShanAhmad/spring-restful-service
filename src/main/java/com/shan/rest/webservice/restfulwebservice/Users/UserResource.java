@@ -1,9 +1,9 @@
 package com.shan.rest.webservice.restfulwebservice.Users;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
@@ -19,5 +19,10 @@ public class UserResource {
     @GetMapping("/users/{id}")
     public User retrieveSingleUser(@PathVariable Integer id){
         return userDaoService.findOne(id);
+    }
+    @PostMapping("/users")
+    public ResponseEntity createNewUser(@RequestBody User user){
+        User createduser = userDaoService.save(user);
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createduser.getId()).toUri()).build();
     }
 }
