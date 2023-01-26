@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class UserResource {
         return user;
     }
     @PostMapping("/users")
-    public ResponseEntity createNewUser(@RequestBody User user){
+    public ResponseEntity createNewUser(@Valid @RequestBody User user){
         User createduser = userDaoService.save(user);
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createduser.getId()).toUri()).build();
     }
