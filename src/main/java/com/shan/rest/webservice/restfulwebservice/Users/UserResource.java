@@ -29,4 +29,12 @@ public class UserResource {
         User createduser = userDaoService.save(user);
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createduser.getId()).toUri()).build();
     }
+
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable Integer id){
+        User user = userDaoService.delete(id);
+        if(user == null){
+            throw new UserNotFoundException("id: "+id);
+        }
+    }
 }
