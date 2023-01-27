@@ -1,11 +1,14 @@
 package com.shan.rest.webservice.restfulwebservice.Users;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
-
+@JsonFilter("SomeBeanFilter")
 public class User {
+    //static Filtering = @JsonIgnore
     private Integer id;
     @Size(min = 2,message = "Minimum 2 characters required")
     private String name;
